@@ -12,7 +12,7 @@ type InsertUser struct {
 type FindOneByUser struct {
 	Username string `json:"username" binding:"required,max=15,min=5"`
 	Password string `json:"password" binding:"required,max=15,min=5"`
-	Status   int    `json:"status" binding:"default=0"`
+	Status   int    `json:"status"`
 }
 
 type FindOneByUsername struct {

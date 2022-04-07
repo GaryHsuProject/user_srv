@@ -4,7 +4,6 @@ import (
 	"shop/driver"
 	"shop/dto"
 	"shop/internal/user"
-	"shop/pkg/response"
 
 	"github.com/gin-gonic/gin"
 )
@@ -18,16 +17,32 @@ func inject() user.Service {
 
 func InsertUser(c *gin.Context) {
 	req := dto.InsertUser{}
-	response.ResponseJSON(c, c.ShouldBindJSON(&req))
+	err := c.ShouldBindJSON(&req)
+	if err != nil {
+		c.Error(err)
+		return
+	}
 	srv := inject()
-	err := srv.Insert(&req)
-	response.ResponseJSON(c, err)
+	err = srv.Insert(&req)
+	if err != nil {
+		c.Error(err)
+		return
+	}
+	c.JSON(200, struct{}{})
 }
 
 func Login(c *gin.Context) {
 	req := dto.FindOneByUser{}
-	response.ResponseJSON(c, c.ShouldBindJSON(&req))
+	err := c.ShouldBindJSON(&req)
+	if err != nil {
+		c.Error(err)
+		return
+	}
 	srv := inject()
 	res, err := srv.Login(&req)
-	response.ResponseJSON(c, res, err)
+	if err != nil {
+		c.Error(err)
+		return
+	}
+	c.JSON(200, res)
 }

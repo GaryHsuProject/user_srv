@@ -9,9 +9,9 @@ import (
 )
 
 var once sync.Once
+var db *gorm.DB
 
 func InitGorm() *gorm.DB {
-	var db *gorm.DB
 	var err error
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local",
 		GlobalConfig.MysqlConfig.Username,

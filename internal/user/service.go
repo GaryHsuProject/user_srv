@@ -40,7 +40,6 @@ func (u *UserService) Insert(req *dto.InsertUser) error {
 		Password:       password,
 		Status:         req.Status,
 		RoleId:         req.RoleId,
-		EmployeeID:     0,
 		CreateTime:     &now,
 		LastUpdateTime: &now,
 	}

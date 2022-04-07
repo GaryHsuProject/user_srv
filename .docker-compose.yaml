@@ -1,0 +1,20 @@
+version: '3.6'
+
+services:
+  db:
+    image: mysql:8.0.28
+    container_name: mysql
+    restart: always
+    ports:
+      - "33060:3306"
+    volumes:
+      - "~/var/data/mysql:/var/lib/mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+
+  server:
+    image: golang:alpine
+    container_name: server
+    ports:
+      - "8001:8001"
+

@@ -10,11 +10,13 @@ import (
 )
 
 func main() {
-	engine := gin.Default()
+	engine := gin.New()
 	driver.Init()
+	driver.InitLogger()
 	engine.Use(middleware.HandleError(), middleware.PanicHandler())
 	userRouter := engine.Group("/user")
 	userRouter.POST("/register", api.InsertUser)
 	userRouter.POST("/login", api.Login)
-	engine.Run(fmt.Sprintf(":%d", driver.GlobalConfig.Port))
+	err := engine.Run(fmt.Sprintf(":%d", driver.GlobalConfig.Port))
+	panic(err)
 }

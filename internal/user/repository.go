@@ -27,14 +27,15 @@ func (u *UserRepository) Insert(users *models.User) error {
 	return nil
 }
 func (u *UserRepository) FindOne(user *models.User) (*models.User, error) {
-	if err := u.orm.Select("status,role_id").First(&user).Error; err != nil {
+	usr := &models.User{}
+	if err := u.orm.First(usr, user).Error; err != nil {
 		return nil, err
 	}
-	return user, nil
+	return usr, nil
 }
 
 func (u *UserRepository) CheckExistByUsername(user *models.User) (bool, error) {
-	result := u.orm.Find(&user)
+	result := u.orm.Find(user, user)
 	if result.Error != nil {
 		return false, result.Error
 	}

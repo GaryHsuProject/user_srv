@@ -1,14 +1,14 @@
 package config
 
 type ServerConfig struct {
-	Port        int         `mapstructure:"port"`
-	MysqlConfig MysqlConfig `mapstructure:"mysql"`
+	Port        int         `mapstructure:"HOST_PORT"`
+	MysqlConfig MysqlConfig `mapstructure:",squash"`
 }
 
 type MysqlConfig struct {
-	Name     string `mapstructure:"name"`
-	Host     string `mapstructure:"host"`
-	Port     int    `mapstructure:"port"`
-	Username string `mapstructure:"username"`
-	Password string `mapstructure:"password"`
+	Name     string `mapstructure:"MYSQL_DB_NAME"`
+	Host     string `mapstructure:"MYSQL_HOST"`
+	Port     int    `mapstructure:"MYSQL_PORT"`
+	Username string `mapstructure:"MYSQL_USERNAME"`
+	Password string `mapstructure:"MYSQL_PASSWORD"`
 }

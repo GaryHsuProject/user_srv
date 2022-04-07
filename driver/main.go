@@ -10,11 +10,13 @@ var GlobalConfig config.ServerConfig
 
 func Init() {
 	v := viper.New()
-	v.SetConfigFile("./driver/configs.yaml")
+	v.SetConfigFile(".env")
+	v.SetConfigType("env")
 	err := v.ReadInConfig()
 	if err != nil {
-		panic("Read config file error, err:" + err.Error())
+		panic(err)
 	}
+	v.AutomaticEnv()
 	if err := v.Unmarshal(&GlobalConfig); err != nil {
 		panic(err)
 	}
