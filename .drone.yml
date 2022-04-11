@@ -21,23 +21,21 @@ steps:
   #   - echo "start running test..."
   #   - bash ./build.sh
 
-# - name: Deploy
-#   image: appleboy/drone-ssh
-#   depends_on:
-#     - db
-#     # - redis
-#   settings:
-#     host: 
-#       from_secret: host 
-#     username: 
-#       from_secret: user 
-#     password: 
-#       from_secret: password 
-#     port: 22
-#     script:
-#       - cd /home/hsipl/prd/go_shop && git pull
-#       - docker-compose build --no-cache 
-#       - docker-compose up -d
+- name: publish  
+  image: plugins/ecr
+  settings:
+    access_key: 
+      from_secret: aws_access_key
+    secret_key: 
+      from_secret: aws_secret_key
+    repo: 
+      from_secret: aws_ecr_repo
+    registry: 
+      from_secret: aws_ecr_registry
+    region:
+      from_secret: aws_region
+    tags:
+        - 'test'
 
 - name: slack
   image: plugins/slack
