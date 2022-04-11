@@ -1,6 +1,7 @@
 package driver
 
 import (
+	"fmt"
 	"shop/config"
 
 	"github.com/spf13/viper"
@@ -14,7 +15,7 @@ func Init() {
 	v.SetConfigType("env")
 	err := v.ReadInConfig()
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	v.AutomaticEnv()
 	if err := v.Unmarshal(&GlobalConfig); err != nil {
