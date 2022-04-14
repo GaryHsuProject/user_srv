@@ -35,7 +35,7 @@ steps:
     region:
       from_secret: aws_region
     tags:
-        - 'test'
+        - test
 
 - name: slack
   image: plugins/slack
